@@ -27,7 +27,18 @@ public class Player : MonoBehaviour
     static private int gameScore;
     private bool isCoroutineExecuting = false;
 
+    public AdManager adManager;
+
+    
+
     public InputMethod inputType = InputMethod.TouchInput;
+
+    void Start()
+    {
+        adManager.RequestInterstitial();
+        adManager.RequestBanner();
+
+    }
 
     IEnumerator ExecuteAfterTime(float time)
     {
@@ -78,6 +89,10 @@ public class Player : MonoBehaviour
         if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
             loadlevel("GameOverScene");
+            
+            adManager.ShowInterstitialAd();
+            adManager.DestroyInterstitialAd();
+            adManager.ShowBannerAD();
         }
         else
         {

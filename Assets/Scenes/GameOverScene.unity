@@ -683,6 +683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 923297503174816069, guid: 6f387abc0015cc5499992acf12098af7, type: 3}
   scoreText: {fileID: 1226501261}
+  adManager: {fileID: 1870923426}
 --- !u!1 &1215087898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,12 +1329,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870923425}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44339d0e3af8f9443b2ef653a7b3da71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPlacementId: rewardedVideo
 --- !u!4 &1870923427
 Transform:
   m_ObjectHideFlags: 0

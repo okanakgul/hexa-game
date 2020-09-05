@@ -12,7 +12,7 @@ public class TextEditor : MonoBehaviour
     public Text scoreText;
     // Start is called before the first frame update
     private int minutes, seconds;
-
+    //public AdManager adManager;
     private void changeText()
     {        
         seconds = gameScore % 60;
@@ -29,6 +29,7 @@ public class TextEditor : MonoBehaviour
 
     void Start()
     {
+        //adManager.ShowBannerAD();
         gameScore = player.GetComponent<Player>().getScore();
     }
     void Update()
