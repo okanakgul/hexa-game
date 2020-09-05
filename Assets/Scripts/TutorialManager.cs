@@ -11,6 +11,8 @@ public class TutorialManager : MonoBehaviour
     private int popUpIndex = 0;
     public GameObject spawner;
     private bool isCoroutineExecuting = false;
+    float movement = 1f;
+    public float moveSpeed = 600f;
 
     IEnumerator ExecuteAfterTime(float time)
     {
@@ -42,15 +44,14 @@ public class TutorialManager : MonoBehaviour
     {
 
 
-        if (true)
+        if (Input.touchCount > 0)
         {
-            //Touch touch = Input.GetTouch(0);
+            Touch touch = Input.GetTouch(0);
             if (popUpIndex == 0)
             {
-                if ((Input.GetKeyDown(KeyCode.RightArrow)) /*|| (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) && touch.position.x > Screen.width / 2*/)
+                if ((touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) && touch.position.x >= Screen.width / 2)
                 {
-
-
+                    transform.RotateAround(Vector3.zero, Vector3.forward, movement * Time.fixedDeltaTime * -moveSpeed / 2);
                     popUps[popUpIndex].SetActive(false);
                     popUpIndex++;
                     popUps[popUpIndex].SetActive(true);
@@ -58,8 +59,9 @@ public class TutorialManager : MonoBehaviour
             }
             else if (popUpIndex == 1)
             {
-                if ((Input.GetKeyDown(KeyCode.LeftArrow)) /*|| (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) && touch.position.x < Screen.width / 2*/)
+                if ((touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) && touch.position.x < Screen.width / 2)
                 {
+                    transform.RotateAround(Vector3.zero, Vector3.forward, movement * Time.fixedDeltaTime * moveSpeed / 2);
                     popUps[popUpIndex].SetActive(false);
                     popUpIndex++;
                     popUps[popUpIndex].SetActive(true);

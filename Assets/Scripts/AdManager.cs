@@ -32,35 +32,40 @@ public class AdManager : MonoBehaviour
     public void RequestBanner()
     {
         // Create a 320x50 banner at the top of the screen.
-        this.bannerView = new BannerView(Banner_Ad_ID, AdSize.Banner, AdPosition.Bottom);
+        
+        
+        this.bannerView = new BannerView(Banner_Ad_ID, AdSize.Banner, AdPosition.Top);
+        
+       
     }
 
     public void RequestInterstitial()
     {
 
-        // Initialize an InterstitialAd.
-        this.interstitial = new InterstitialAd(Interstitial_Ad_ID);
+        if(this.interstitial == null)
+        {
+            // Initialize an InterstitialAd.
+            this.interstitial = new InterstitialAd(Interstitial_Ad_ID);
 
 
-        // Called when an ad request has successfully loaded.
-        this.interstitial.OnAdLoaded += HandleOnAdLoaded;
-        // Called when an ad request failed to load.
-        this.interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+            // Called when an ad request has successfully loaded.
+            this.interstitial.OnAdLoaded += HandleOnAdLoaded;
+            // Called when an ad request failed to load.
+            this.interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
 
-        AdRequest request = new AdRequest.Builder().Build();
-        this.interstitial.LoadAd(request);
+            AdRequest request = new AdRequest.Builder().Build();
+            this.interstitial.LoadAd(request);
+        }
     }
 
     public void RequestRewardBasedVideo()
     {
         rewardBasedVideo = RewardBasedVideoAd.Instance;
 
-
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
         this.rewardBasedVideo.LoadAd(request, Rewarded_Ad_ID);
-
      }
 
     public void ShowVideoRewardAd()
@@ -79,7 +84,7 @@ public class AdManager : MonoBehaviour
         }
     }
 
-    public void ShowBannerAD()
+    public void ShowBannerAd()
     {
         // Create an empty ad request
         AdRequest request = new AdRequest.Builder().Build();
@@ -91,7 +96,26 @@ public class AdManager : MonoBehaviour
 
     public void DestroyInterstitialAd()
     {
-        this.interstitial.Destroy();
+        if (this.interstitial != null)
+        {
+            this.interstitial.Destroy();
+        }
+        
+    }
+
+
+    public void DestroyBannerAd()
+    {
+        if (this.bannerView != null)
+        {
+            Debug.Log("Sildim");
+            this.bannerView.Destroy();
+        }
+        else
+        {
+            Debug.LogError("Sildim");
+        }
+        
     }
 
     // FOR EVENTS AND DELEGATES FOR ADS

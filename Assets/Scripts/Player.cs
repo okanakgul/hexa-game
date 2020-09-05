@@ -30,13 +30,17 @@ public class Player : MonoBehaviour
     public AdManager adManager;
 
     
+    
 
     public InputMethod inputType = InputMethod.TouchInput;
 
     void Start()
     {
-        adManager.RequestInterstitial();
-        adManager.RequestBanner();
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
+        {
+            adManager.RequestInterstitial();
+        }
+        
 
     }
 
@@ -92,7 +96,7 @@ public class Player : MonoBehaviour
             
             adManager.ShowInterstitialAd();
             adManager.DestroyInterstitialAd();
-            adManager.ShowBannerAD();
+            adManager.ShowBannerAd();
         }
         else
         {
