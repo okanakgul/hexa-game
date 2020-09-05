@@ -841,6 +841,7 @@ MonoBehaviour:
   - {fileID: 988576973}
   - {fileID: 586729572}
   spawner: {fileID: 840973430}
+  moveSpeed: 600
 --- !u!4 &1284344320
 Transform:
   m_ObjectHideFlags: 0
@@ -1431,7 +1432,7 @@ PrefabInstance:
     - target: {fileID: 923297503174816069, guid: 6f387abc0015cc5499992acf12098af7,
         type: 3}
       propertyPath: inputType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 923297503174816069, guid: 6f387abc0015cc5499992acf12098af7,
         type: 3}
