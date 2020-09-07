@@ -7,34 +7,61 @@ using UnityEngine.SceneManagement;
 
 public class TextEditor : MonoBehaviour
 {
-    public Player player;
+
     private int gameScore;
+    private int bestScore;
     public Text scoreText;
+    public Text bestScoreText;
+    public Text recordText;
+    public float timer;
     // Start is called before the first frame update
     private int minutes, seconds;
-    //public AdManager adManager;
-    private void changeText()
-    {        
-        seconds = gameScore % 60;
-        if (gameScore >= 60)
-        {
-            minutes = gameScore / 60;
-            scoreText.text = minutes + " minutes " + seconds + " seconds";
-        }
-        else
-        {
-            scoreText.text = seconds + " seconds";
-        }
-    }
+
 
     void Start()
     {
-        //adManager.ShowBannerAD();
-        gameScore = player.GetComponent<Player>().getScore();
+        gameScore = PlayerPrefs.GetInt("CurrentScore", 0);
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        changeText(scoreText, gameScore);
+        changeText(bestScoreText, bestScore);
+        recordText.enabled = false;
     }
+
+    private void blinkingText(Text text)
+    {
+        timer = timer + Time.deltaTime;
+        if (timer >= 0.5)
+        {
+            text.enabled = true;
+        }
+        if (timer >= 1)
+        {
+            text.enabled = false;
+            timer = 0;
+        }
+    }
+
+    private void changeText(Text text, int score)
+    {
+        seconds = score % 60;
+        if (score >= 60)
+        {
+            minutes = score / 60;
+            text.text = minutes + " minutes " + seconds + " seconds";
+        }
+        else
+        {
+            text.text = seconds + " seconds";
+        }
+    }
+
     void Update()
     {
-        changeText();
+        if (gameScore >= bestScore)
+        {
+            changeText(bestScoreText, bestScore);
+            blinkingText(recordText);
+        }
 
     }
 }

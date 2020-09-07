@@ -19,12 +19,15 @@ public class Player : MonoBehaviour
     public GameObject warningPopUp;
     public GameObject backToMenuPopUp;
     private bool backToMenuShow = true;
+    private long scoreToPost;
+
 
     public int lives = 1;
     public float moveSpeed = 600f;
 
     float movement = 1f;
-    static private int gameScore;
+    private int currentScore;
+    private int bestScore;
     private bool isCoroutineExecuting = false;
 
     public AdManager adManager;
@@ -38,7 +41,13 @@ public class Player : MonoBehaviour
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
-            adManager.RequestInterstitial();
+            bestScore = PlayerPrefs.GetInt("BestScore", 0);
+            int adChance = Random.Range(0, 4);
+            if(adChance >= 3)
+            {
+                adManager.RequestInterstitial();
+            }
+            
         }
         
 
@@ -59,9 +68,17 @@ public class Player : MonoBehaviour
         isCoroutineExecuting = false;
     }
 
+    public void setScores()
+    {
+        PlayerPrefs.SetInt("CurrentScore", currentScore);
+        PlayerPrefs.SetInt("BestScore", bestScore);
+    }
+
+
+
     public int getScore()
     {
-        return gameScore;
+        return currentScore;
     }
     // Update is called once per frame
     void Update()
@@ -70,7 +87,7 @@ public class Player : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
-            gameScore = (int)Time.timeSinceLevelLoad;
+            currentScore = (int)Time.timeSinceLevelLoad;
         }
            
         if (inputType == InputMethod.KeyboardInput)
@@ -92,11 +109,16 @@ public class Player : MonoBehaviour
     {
         if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
-            loadlevel("GameOverScene");
-            
+
+            if (currentScore > bestScore)
+            {
+                bestScore = currentScore;
+            }
+            setScores();
+            scoreToPost = PlayerPrefs.GetInt("BestScore", 0);
+            loadlevel("GameOverScene");            
             adManager.ShowInterstitialAd();
             adManager.DestroyInterstitialAd();
-            adManager.ShowBannerAd();
         }
         else
         {
