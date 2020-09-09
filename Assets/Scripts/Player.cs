@@ -1,10 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
+
 
 
 public enum InputMethod
@@ -41,6 +38,9 @@ public class Player : MonoBehaviour
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
+            int length = FindObjectOfType<AudioController>().sounds.Length;
+            int index = Random.Range(0, length - 1);
+            FindObjectOfType<AudioController>().Play(index);
             bestScore = PlayerPrefs.GetInt("BestScore", 0);
             int adChance = Random.Range(0, 4);
             if(adChance >= 3)

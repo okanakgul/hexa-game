@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float spawnRate = 1f;
+    public float spawnRate = 0.0166f;
+    public float spawnRateFactor = 0.0166f;
+
+    void Start()
+    {
+        spawnRateFactor = 0.0166f;
+        spawnRate = 0.3f;
+        InvokeRepeating("UpdateSpawnRate", 1f, 1f);  //1s delay, repeat every 1s
+    }
 
     public GameObject hexagonPrefab;
 
@@ -40,18 +48,24 @@ public class Spawner : MonoBehaviour
         hexagonPrefab.GetComponent<Hexagon>().clockwise = rotationDir;
     }
 
+
+    void UpdateSpawnRate()
+    {
+        if ((int)Time.timeSinceLevelLoad < 60 && spawnRate < 1.2f)
+        {
+            spawnRate += spawnRateFactor;
+        }
+        //Debug.Log("SpawnRate: " + spawnRate);
+    }
+
     // Update is called once per frame
     void Update()
     {
        
         if (Time.time >= nextTimeToSpawsn)
         {
-
             colorPicker();
             rotationPicker();
-
-
-
             // lineRenderer = hexagonPrefab.GetComponent<LineRenderer>();
             // lineRenderer.sharedMaterial.color = Color.green;
             Instantiate(hexagonPrefab, Vector3.zero, Quaternion.identity);

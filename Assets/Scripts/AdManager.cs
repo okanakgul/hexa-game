@@ -34,7 +34,7 @@ public class AdManager : MonoBehaviour
         // Create a 320x50 banner at the top of the screen.
         
         
-        this.bannerView = new BannerView(Banner_Ad_ID, AdSize.Banner, AdPosition.Top);
+        this.bannerView = new BannerView(Banner_Ad_ID, AdSize.Banner, AdPosition.Bottom);
         
        
     }

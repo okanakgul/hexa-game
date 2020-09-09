@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 
 public class TextEditor : MonoBehaviour
@@ -59,6 +57,7 @@ public class TextEditor : MonoBehaviour
     {
         if (gameScore >= bestScore)
         {
+            Debug.Log("Aasd");
             changeText(bestScoreText, bestScore);
             blinkingText(recordText);
         }
