@@ -12,8 +12,8 @@ public class AdManager : MonoBehaviour
 
     string App_ID = "ca-app-pub-1734601237492663~3499928637";
 
-    string Banner_Ad_ID = "ca-app-pub-3940256099942544/6300978111";
-    string Interstitial_Ad_ID = "ca-app-pub-3940256099942544/1033173712";
+    string Banner_Ad_ID = "ca-app-pub-1734601237492663/7170879634";
+    string Interstitial_Ad_ID = "ca-app-pub-1734601237492663/5239551563";
     string Rewarded_Ad_ID = "ca-app-pub-3940256099942544/5224354917";
 
     private BannerView bannerView;

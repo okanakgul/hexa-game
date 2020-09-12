@@ -5,6 +5,10 @@ using UnityEngine.Audio;
 
 public class AudioController : MonoBehaviour
 {
+
+
+    public AudioClip[] audioclips;
+    
     public Sound[] sounds;
 
     void Awake()
@@ -13,6 +17,8 @@ public class AudioController : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
+
+            s.source.clip.LoadAudioData();
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -23,5 +29,7 @@ public class AudioController : MonoBehaviour
     {
         Sound s = sounds[index];
         s.source.Play();
+        Debug.Log("Called");
     }
+    
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 
 
@@ -28,9 +29,10 @@ public class Player : MonoBehaviour
     private bool isCoroutineExecuting = false;
 
     public AdManager adManager;
+    private int randomIndex;
 
-    
-    
+
+
 
     public InputMethod inputType = InputMethod.TouchInput;
 
@@ -38,10 +40,16 @@ public class Player : MonoBehaviour
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
-            int length = FindObjectOfType<AudioController>().sounds.Length;
-            int index = Random.Range(0, length - 1);
-            FindObjectOfType<AudioController>().Play(index);
             bestScore = PlayerPrefs.GetInt("BestScore", 0);
+
+            // Main Theme Play Randomly
+            //int length = FindObjectOfType<AudioController>().sounds.Length;
+            //randomIndex = Random.Range(0, length);
+            //FindObjectOfType<AudioController>().Play(randomIndex);
+
+            FindObjectOfType<audioManager>().Play();
+
+            // 40% CHANCE FOR AD
             int adChance = Random.Range(0, 4);
             if(adChance >= 3)
             {
@@ -83,6 +91,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Music Loop
+        /*if (!FindObjectOfType<AudioController>().sounds[randomIndex].source.isPlaying)
+        {
+            randomIndex = (randomIndex + 1) % 2;
+            FindObjectOfType<AudioController>().Play(randomIndex);
+        }*/
+
 
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
