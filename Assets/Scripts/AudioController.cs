@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿/*using UnityEngine;
+
 
 public class AudioController : MonoBehaviour
 {
@@ -33,3 +31,4 @@ public class AudioController : MonoBehaviour
     }
     
 }
+*/

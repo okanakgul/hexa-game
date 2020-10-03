@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using GoogleMobileAds.Api;
-using UnityEngine.UI;
+
 
 
 
@@ -13,6 +11,8 @@ public class AdManager : MonoBehaviour
     string App_ID = "ca-app-pub-1734601237492663~3499928637";
 
     string Banner_Ad_ID = "ca-app-pub-1734601237492663/7170879634";
+
+
     string Interstitial_Ad_ID = "ca-app-pub-1734601237492663/5239551563";
     string Rewarded_Ad_ID = "ca-app-pub-3940256099942544/5224354917";
 
@@ -47,11 +47,13 @@ public class AdManager : MonoBehaviour
             // Initialize an InterstitialAd.
             this.interstitial = new InterstitialAd(Interstitial_Ad_ID);
 
-
+            /*
             // Called when an ad request has successfully loaded.
             this.interstitial.OnAdLoaded += HandleOnAdLoaded;
             // Called when an ad request failed to load.
-            this.interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+            this.interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;*/
+
+            Debug.LogWarning("Loaded");
 
             AdRequest request = new AdRequest.Builder().Build();
             this.interstitial.LoadAd(request);

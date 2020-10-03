@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
+
 
 
 
@@ -29,36 +29,30 @@ public class Player : MonoBehaviour
     private bool isCoroutineExecuting = false;
 
     public AdManager adManager;
-    private int randomIndex;
-
+    private int adChance;
 
 
 
     public InputMethod inputType = InputMethod.TouchInput;
 
+    void Awake()
+    {
+        adChance = Random.Range(0, 4);
+        if (adChance >= 3)
+        {
+            adManager.RequestInterstitial();
+        }
+       
+    }
     void Start()
     {
+
+
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
-            bestScore = PlayerPrefs.GetInt("BestScore", 0);
+            bestScore = PlayerPrefs.GetInt("BestScore", 0);    
 
-            // Main Theme Play Randomly
-            //int length = FindObjectOfType<AudioController>().sounds.Length;
-            //randomIndex = Random.Range(0, length);
-            //FindObjectOfType<AudioController>().Play(randomIndex);
-
-            FindObjectOfType<audioManager>().Play();
-
-            // 40% CHANCE FOR AD
-            int adChance = Random.Range(0, 4);
-            if(adChance >= 3)
-            {
-                adManager.RequestInterstitial();
-            }
-            
-        }
-        
-
+        }   
     }
 
     IEnumerator ExecuteAfterTime(float time)
@@ -82,24 +76,9 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("BestScore", bestScore);
     }
 
-
-
-    public int getScore()
-    {
-        return currentScore;
-    }
     // Update is called once per frame
     void Update()
     {
-
-        // Music Loop
-        /*if (!FindObjectOfType<AudioController>().sounds[randomIndex].source.isPlaying)
-        {
-            randomIndex = (randomIndex + 1) % 2;
-            FindObjectOfType<AudioController>().Play(randomIndex);
-        }*/
-
-
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
@@ -115,8 +94,7 @@ public class Player : MonoBehaviour
         else if (inputType == InputMethod.TouchInput)
         {
             TouchInput();
-        }
-       
+        }    
 
     }
 
@@ -132,9 +110,14 @@ public class Player : MonoBehaviour
             }
             setScores();
             scoreToPost = PlayerPrefs.GetInt("BestScore", 0);
-            loadlevel("GameOverScene");            
+            loadlevel("GameOverScene");
+            
+            
+            
             adManager.ShowInterstitialAd();
-            adManager.DestroyInterstitialAd();
+            //adManager.DestroyInterstitialAd();
+            
+            
         }
         else
         {

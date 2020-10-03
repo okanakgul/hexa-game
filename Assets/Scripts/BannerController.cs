@@ -14,12 +14,12 @@ public class BannerController : MonoBehaviour
         //StartCoroutine(BannerCoroutine());
     }
 
-
+    /*
 
     IEnumerator BannerCoroutine()
     {
         yield return new WaitForSeconds(1);
         adManager.ShowBannerAd();
     }
-
+    */
 }
