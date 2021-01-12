@@ -10,11 +10,12 @@ public class AdManager : MonoBehaviour
 
     string App_ID = "ca-app-pub-1734601237492663~3499928637";
 
-    string Banner_Ad_ID = "ca-app-pub-1734601237492663/7170879634";
+    string Banner_Ad_ID = "ca-app-pub-1734601237492663/1475023145";
 
 
-    string Interstitial_Ad_ID = "ca-app-pub-1734601237492663/5239551563";
-    string Rewarded_Ad_ID = "ca-app-pub-3940256099942544/5224354917";
+    string Interstitial_Ad_ID = "ca-app-pub-1734601237492663/8587226409";
+    
+    string Rewarded_Ad_ID = "";//"ca-app-pub-3940256099942544/5224354917";
 
     private BannerView bannerView;
     private InterstitialAd interstitial;

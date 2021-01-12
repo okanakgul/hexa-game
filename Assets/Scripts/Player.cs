@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 
 
@@ -17,8 +17,8 @@ public class Player : MonoBehaviour
     public GameObject warningPopUp;
     public GameObject backToMenuPopUp;
     private bool backToMenuShow = true;
-    private long scoreToPost;
 
+    public Text scoreText;
 
     public int lives = 1;
     public float moveSpeed = 600f;
@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainScene"))
         {
             currentScore = (int)Time.timeSinceLevelLoad;
+            scoreText.text = "Time: " + currentScore;
         }
            
         if (inputType == InputMethod.KeyboardInput)
@@ -109,7 +110,8 @@ public class Player : MonoBehaviour
                 bestScore = currentScore;
             }
             setScores();
-            scoreToPost = PlayerPrefs.GetInt("BestScore", 0);
+            GPlayServices.PostToLeaderboard(PlayerPrefs.GetInt("BestScore", 0) * 1000);
+            
             loadlevel("GameOverScene");
             
             
