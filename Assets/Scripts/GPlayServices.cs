@@ -12,24 +12,15 @@ public class GPlayServices : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(this);
+
         try
         {
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
             PlayGamesPlatform.InitializeInstance(config);
             PlayGamesPlatform.DebugLogEnabled = true;
             PlayGamesPlatform.Activate();
-            Social.localUser.Authenticate((bool success) => 
-            {
-                if (success)
-                {
-                    SceneManager.LoadScene("StartScene");
-                }
-                else
-                {
-                    Application.Quit();
-                }
-            
+            PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptOnce, (result) => {
+                SceneManager.LoadScene("StartScene");
             });
         }
         catch (Exception e)
